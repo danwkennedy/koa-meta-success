@@ -1,8 +1,6 @@
-'use strict';
-
-module.exports = function *success(next) {
-    yield next;
-    if (this.status >= 200 && this.status < 300) {
-      this.state.meta.status = 'success';
-    }
+module.exports = async function success(ctx, next) {
+  await next();
+  if (ctx.response.status >= 200 && ctx.response.status < 300) {
+    ctx.state.meta.status = 'success';
+  }
 };
